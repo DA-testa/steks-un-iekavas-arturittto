@@ -1,31 +1,40 @@
-# python3
+#Artūrs Čubukovs 16.grupa 221RDB127 1.m.d.Datu struktūras
+def is_matching_bracket(opening, closing):
+    if opening == '[' and closing == ']':
+        return True
+    elif opening == '{' and closing == '}':
+        return True
+    elif opening == '(' and closing == ')':
+        return True
+    else:
+        return False
 
-from collections import namedtuple
+def find_unmatched_bracket(s):
+    stack = []
+    for i in range(len(s)):
+        if s[i] in ['[','{','(']:
+            stack.append((s[i], i))
+        elif s[i] in [']','}',')']:
+            if not stack:
+                return i + 1
+            opening, index = stack.pop()
+            if not is_matching_bracket(opening, s[i]):
+                return i + 1
+    if stack:
+        opening, index = stack.pop()
+        return index + 1
+    return "Success"
 
-Bracket = namedtuple("Bracket", ["char", "position"])
-
-
-def are_matching(left, right):
-    return (left + right) in ["()", "[]", "{}"]
-
-
-def find_mismatch(text):
-    opening_brackets_stack = []
-    for i, next in enumerate(text):
-        if next in "([{":
-            # Process opening bracket, write your code here
-            pass
-
-        if next in ")]}":
-            # Process closing bracket, write your code here
-            pass
-
-
-def main():
-    text = input()
-    mismatch = find_mismatch(text)
-    # Printing answer, write your code here
-
-
-if __name__ == "__main__":
-    main()
+if __name__=='__main__':
+    option = input("Enter 'F' to use test files or 'I' to input the brackets:")
+    if option == 'F':
+        with open('test_cases.txt', 'r') as f:
+            test_cases = f.readlines()
+        for test_case in test_cases:
+            input_str = test_case.strip()
+            print(find_unmatched_bracket(input_str))
+    elif option=='I':
+        input_str = input("Enter the string to check: ")
+        print(find_unmatched_bracket(input_str))
+    else:
+        print("Invalid option")
