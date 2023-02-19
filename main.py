@@ -26,7 +26,7 @@ def find_unmatched_bracket(s):
     return "Success"
 
 if __name__=='__main__':
-    option = input("")
+    option = input("Enter 'F' to use test files or 'I' to input the brackets: ")
     if option == 'F':
         with open('test_cases.txt', 'r') as f:
             test_cases = f.readlines()
