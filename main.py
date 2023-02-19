@@ -24,17 +24,19 @@ def find_unmatched_bracket(s):
         opening, index = stack.pop()
         return index + 1
     return "Success"
-
-if __name__=='__main__':
-    option = input("Enter 'F' to use test files or 'I' to input the brackets: ")
-    if option == 'F':
-        with open('test_cases.txt', 'r') as f:
-            test_cases = f.readlines()
-        for test_case in test_cases:
-            input_str = test_case.strip()
-            print(find_unmatched_bracket(input_str))
-    elif option=='I':
-        input_str = input("Enter the string to check: ")
-        print(find_unmatched_bracket(input_str))
+def main():
+    text = input()
+    if 'I' in text:
+        text = input()
+    elif 'F' in text:
+        file = "./test/5"
+        with open(file) as f:
+            text = f.read()
+    mismatch = find_mismatch(text)
+    # Printing answer, write your code here
+    if not mismatch :
+        print("Success")
     else:
-        print("Invalid option")
+        print(mismatch)
+if __name__ == "__main__":
+    main()
